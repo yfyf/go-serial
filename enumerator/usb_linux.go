@@ -35,9 +35,11 @@ func nativeGetDetailedPortsList() ([]*PortDetails, error) {
 
 func nativeGetPortDetails(portPath string) (*PortDetails, error) {
 	portName := filepath.Base(portPath)
+	result := &PortDetails{Name: portPath}
+
 	devicePath := fmt.Sprintf("/sys/class/tty/%s/device", portName)
 	if _, err := os.Stat(devicePath); err != nil {
-		return &PortDetails{}, nil
+		return result, nil
 	}
 	realDevicePath, err := filepath.EvalSymlinks(devicePath)
 	if err != nil {
@@ -49,7 +51,6 @@ func nativeGetPortDetails(portPath string) (*PortDetails, error) {
 	}
 	subSystem := filepath.Base(subSystemPath)
 
-	result := &PortDetails{Name: portPath}
 	switch subSystem {
 	case "usb-serial":
 		err := parseUSBSysFS(filepath.Dir(filepath.Dir(realDevicePath)), result)
