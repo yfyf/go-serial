@@ -22,6 +22,7 @@ type PortDetails struct {
 	// Product is an OS-dependent string that describes the serial port, it may
 	// be not always available and it may be different across OS.
 	Product string
+	Manufacturer string
 }
 
 // GetDetailedPortsList retrieve ports details like USB VID/PID.
