@@ -15,13 +15,14 @@ type PortDetails struct {
 	IsUSB        bool
 	VID          string
 	PID          string
+	BcdDevice    string
 	SerialNumber string
 
 	// Manufacturer string
 
 	// Product is an OS-dependent string that describes the serial port, it may
 	// be not always available and it may be different across OS.
-	Product string
+	Product      string
 	Manufacturer string
 }
 
